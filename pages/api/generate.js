@@ -71,3 +71,4 @@ function generatePrompt(idea) {
 }
 
 
+//jajaja
