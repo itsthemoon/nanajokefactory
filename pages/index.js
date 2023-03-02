@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>Nana's Go-Go Joke Factory</title>
         <link rel="icon" href="/nana.png" />
       </Head>
 
