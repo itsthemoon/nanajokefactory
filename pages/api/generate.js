@@ -55,7 +55,7 @@ export default async function (req, res) {
 function generatePrompt(idea) {
   const capitalizedJoke =
     idea[0].toUpperCase() + idea.slice(1);
-  return `Create a "Grandma" type joke based on nana's joke idea. The joke must make sense, be witty, and sometimes can be crude. Nana is a 72 year old woman. At the end of the day, the punchline of the joke has to hit.
+  return `Create a "Grandma" type joke based on nana's joke idea. The joke must make sense, be witty, and sometimes can be crude. Nana is a 72 year old woman. At the end of the day, the punchline of the joke has to be clever and thought provoking.
 
   Idea: Joke about balls
   Joke: What did the female cannon ball say to the male cannon ball? I think we’re going to have a Berber!!
@@ -66,7 +66,7 @@ function generatePrompt(idea) {
   Joke: What did the buffalo say when his boy went to school? Bi-Son!!!
   Idea: Joke about states
   Joke: What's the capital of Wyoming?? ....'W'!
-  Idea: ${idea}
+  Idea: Joke about ${idea}
   Joke:`;
 }
 
