@@ -15,11 +15,11 @@ export default async function (req, res) {
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const joke = req.body.joke || '';
+  if (joke.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid joke idea",
       }
     });
     return;
@@ -28,8 +28,12 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
+      prompt: generatePrompt(joke),
       temperature: 0.6,
+      max_tokens: 150,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
@@ -48,15 +52,22 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+function generatePrompt(idea) {
+  const capitalizedJoke =
+    idea[0].toUpperCase() + idea.slice(1);
+  return `Create a "Grandma" type joke based on nana's joke idea. The joke must make sense, be witty, and sometimes can be crude. Nana is a 72 year old woman. At the end of the day, the punchline of the joke has to hit.
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+  Idea: Joke about balls
+  Joke: What did the female cannon ball say to the male cannon ball? I think we’re going to have a Berber!!
+  Idea: Joke about babies
+  Idea: Joke about daughters
+  Joke:  A dad took his daughter to work one day for Take Your Child to Work and when they got to his office she started crying. His co-workers gathered round to see what was the matter . She sniffles and says "Dad , where are all the clowns you work with?"
+  Idea: Joke about animals
+  Joke: What did the buffalo say when his boy went to school? Bi-Son!!!
+  Idea: Joke about states
+  Joke: What's the capital of Wyoming?? ....'W'!
+  Idea: ${idea}
+  Joke:`;
 }
+
+
